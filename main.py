@@ -17,4 +17,17 @@ SIMPLE_HTML = '''<html>
 
 simple_soup = BeautifulSoup(SIMPLE_HTML, "html.parser")
 
-print(simple_soup.find("h1").string)
+
+def header():
+    h1_tag = simple_soup.find("h1")
+    print(h1_tag.string)
+
+
+def list():
+    list_item = simple_soup.find_all("li")
+    for li in list_item:
+        print(li.string, end=" ")
+
+
+header()
+list()
