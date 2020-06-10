@@ -40,4 +40,27 @@ def find_name():
     print(name)
 
 
+def find_link():
+    locators = "article.product_pod a"
+    link = soup.select_one(locators).attrs["href"]
+    print(link)
+
+
+def find_price():
+    locators = "article.product_pod div.product_price p.price_color"
+    price = soup.select_one(locators)
+    print(price.string)
+
+
+def find_rating():
+    locators = "article.product_pod p.star-rating"
+    rating = soup.select_one(locators)
+    classes = rating.attrs['class']
+    rating_classes = [r for r in classes if r != "star-rating"]
+    print(rating_classes)
+
+
 find_name()
+find_link()
+find_price()
+find_rating()
