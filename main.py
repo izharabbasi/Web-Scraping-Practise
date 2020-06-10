@@ -25,9 +25,23 @@ def header():
 
 def list():
     list_item = simple_soup.find_all("li")
-    for li in list_item:
-        print(li.string, end=" ")
+    one_list = [l.string for l in list_item]
+    print(one_list)
+
+
+def subtitle():
+    paragraph = simple_soup.find("p", {"class": "subtitle"})
+    print(paragraph.string)
+
+
+def all_para():
+    paragraphs = simple_soup.find_all("p")
+    para = [
+        p for p in paragraphs if "subtitle" not in p.attrs.get("class", [])]
+    print(para[0].string)
 
 
 header()
 list()
+subtitle()
+all_para()
