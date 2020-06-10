@@ -31,6 +31,13 @@ ITEM_HTML = '''<html><head></head><body>
 '''
 
 
+class ParsedItemLocators:
+    NAME_LOCATOR = "article.product_pod h3 a"
+    LINK_LOCATOR = "article.product_pod a"
+    PRICE_LOCATOR = "article.product_pod div.product_price p.price_color"
+    RATING_LOCTAOR = "article.product_pod p.star-rating"
+
+
 class ParseItem:
 
     def __init__(self, page):
@@ -38,25 +45,25 @@ class ParseItem:
 
     @property
     def find_name(self):
-        locators = "article.product_pod h3 a"
+        locators = ParsedItemLocators.NAME_LOCATOR
         name = self.soup.select_one(locators).attrs["title"]
         return name
 
     @property
     def find_link(self):
-        locators = "article.product_pod a"
+        locators = ParsedItemLocators.LINK_LOCATOR
         link = self.soup.select_one(locators).attrs["href"]
         return link
 
     @property
     def find_price(self):
-        locators = "article.product_pod div.product_price p.price_color"
+        locators = ParsedItemLocators.PRICE_LOCATOR
         price = self.soup.select_one(locators)
         return price.string
 
     @property
     def find_rating(self):
-        locators = "article.product_pod p.star-rating"
+        locators = ParsedItemLocators.RATING_LOCTAOR
         rating = self.soup.select_one(locators)
         classes = rating.attrs['class']
         rating_classes = [r for r in classes if r != "star-rating"]
